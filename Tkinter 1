@@ -1,0 +1,39 @@
+#
+#
+#
+import tkinter as tk
+win = tk.Tk()
+win.title('Moje prve okno')
+pocitadlo = 0
+#
+#
+#
+def akcia ():
+    global pocitadlo
+    print('akcia',pocitadlo)
+    pocitadlo +=1
+    farba = canvas.itemcget(2, 'fill')
+    print(farba)
+    if farba == 'hotpink':
+        canvas.itemconfig(2, fill = 'red')
+        canvas.itemconfig(3, fill = 'limegreen')
+    else:
+        canvas.itemconfig(2, fill = 'hotpink')
+        canvas.itemconfig(3, fill = 'red')
+#
+#
+#
+canvas = tk.Canvas(win, width=1200, height=800, bg='magenta3')
+canvas.pack()       # vytvorene dava pod seba (napr. grid)
+
+button = tk.Button(win, text='Click', width=100, bg="green1", command=akcia)
+button.pack()
+#
+# tvorba objektov a priradzovanie identifikatorov
+#
+obj1 = canvas.create_line(50, 50, 200, 200)
+obj2 = canvas.create_rectangle(100, 100, 240, 300, fill = "limegreen")
+obj3 = canvas.create_oval(800, 500, 500, 250, fill = 'indigo')
+print(obj1,obj2,obj3)
+canvas.itemconfig(2, fill = 'hotpink')
+win.mainloop()
