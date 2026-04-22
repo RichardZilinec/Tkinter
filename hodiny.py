@@ -35,4 +35,9 @@ canvas.create_line(s1, s2, s1+dlha_ruc*math.cos(uhol_sekunda),  s2+dlha_ruc*math
 #
 uhol_hodina = math.radians(cas.hour * 30 + cas.minute*0.5 - 90)   #-90 lebo posuvame do hora na 12 hodinu z 3
 canvas.create_line(s1, s2, s1+kratka_ruc*math.cos(uhol_hodina),  s2+kratka_ruc*math.sin(uhol_hodina), width = hrubka_h, fill= 'black')
+#
+#
+#
+for i in range(0, 13):
+    canvas.create_text()
 win.mainloop()
