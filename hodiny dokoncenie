@@ -16,16 +16,22 @@ hrubka_s = 1
 #
 canvas = tk.Canvas(win, width=velkost, height=velkost, bg='white')
 canvas.pack()
-
-
+#
+# rucicky
+#
 rucicka_min =  canvas.create_line(s1, s2, s1,  s2 - dlha_ruc, width = hrubka_h, fill= 'black')
-
-
+rucicka_sec =  canvas.create_line(s1, s2, s1,  s2 - dlha_ruc, width = hrubka_s, fill= 'red')
+rucicka_hod =  canvas.create_line(s1, s2, s1,  s2 - kratka_ruc, width = hrubka_h, fill= 'black')
+#
+# cifernik
+#
+canvas.create_oval(240, 240, 560, 560)
+for i in range(1, 13):
+   canvas.create_text(s1+170*math.cos(math.radians(i*30-90)),s2+170*math.sin(math.radians(i*30-90)) , font='Times 15 italic bold', text=i)
+#
+#
+#
 def draw():
-    canvas.delete('all')
-    canvas.create_oval(240, 240, 560, 560)
-    for i in range(1, 13):
-        canvas.create_text(s1+170*math.cos(math.radians(i*30-90)),s2+170*math.sin(math.radians(i*30-90)) , font='Times 15 italic bold', text=i)
     #
     # ziskanie systemoveho casu
     #
@@ -40,9 +46,10 @@ def draw():
     #
     #
     #
-    print(canvas.itemcget(rucicka_min))
-    print(canvas.coords(rucicka_min))  # aj setter aj getter
-    canvas.itemconfig(rucicka_min, )
+    canvas.coords(rucicka_min, s1, s2, s1 + dlha_ruc * math.cos(uhol_minuta), s2 + dlha_ruc * math.sin(uhol_minuta))
+    canvas.coords(rucicka_sec, s1, s2, s1 + dlha_ruc * math.cos(uhol_sekunda), s2 + dlha_ruc * math.sin(uhol_sekunda))
+    canvas.coords(rucicka_hod, s1, s2, s1 + kratka_ruc * math.cos(uhol_hodina), s2 + kratka_ruc * math.sin(uhol_hodina))
     canvas.after(1000, draw)
+
 draw()
 win.mainloop()
