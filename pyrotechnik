@@ -1,0 +1,61 @@
+import tkinter as tk, random
+#
+# funkcia kliknutia
+#
+def click (event):
+    global stop
+    objekty = canvas.find_overlapping(event.x, event.y, event.x+1, event.y+1)
+    print(objekty,winner)
+    if winner in objekty:
+        print('vyhral si')
+        canvas.create_text(20, 20, text='Vyhral si', font=('Arial', 50, 'bold'), anchor='nw')
+        stop = True
+#
+# funkcia hodin
+#
+def timer():
+    global cas
+    cas = cas - 1
+    canvas.itemconfig(hodiny, text=cas)
+    if stop == False:
+        if cas > 0:
+            canvas.after(1000, timer)
+        else:
+            canvas.create_text(20, 20, text='Zdochol si', font=('Arial', 50, 'bold'), anchor='nw')
+#
+#
+#
+win = tk.Tk()
+win.title('pyrotechnik')
+#
+# konstanty
+#
+velkost = 800
+colors = ['green', 'red', 'gray', 'blue', 'orange']
+wires = []
+sirka = 15
+dlzka = 300
+cas = 60
+stop = False
+#
+# tvorba okna
+#
+canvas = tk.Canvas(win, width=velkost, height=velkost, bg='white')
+canvas.pack()
+hodiny = canvas.create_text(600, 200, text=cas, font=('Arial', 50, 'bold'), anchor='nw')
+#
+#
+#
+for i in range (0, len(colors)):
+    wires.append(canvas.create_rectangle(200, 200+(i*sirka), 200+dlzka, 200+(i+1)*sirka , fill=colors[i], width=2, outline='black'))
+winner = random.choice(wires)
+
+#
+# volanie funkcii
+#
+canvas.bind('<Button-1>',click)
+timer()
+#
+#
+#
+win.mainloop()
